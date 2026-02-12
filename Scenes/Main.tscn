@@ -31,5 +31,7 @@ use_collision = true
 size = Vector3(12, 1, 12)
 
 [node name="Player" parent="." unique_id=1093121812 instance=ExtResource("1_r150o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2276988, 0)
-_moveSpeed = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.234293, 0)
+_moveSpeed = 4.0
+_jumpForce = 5.0
+_mouseSensitivity = 0.003
