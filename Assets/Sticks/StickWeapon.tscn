@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cdfrfcb2vncqp"]
+
+[ext_resource type="PackedScene" uid="uid://gwg33cblkord" path="res://Assets/Sticks/Stick.glb" id="1_fs8ny"]
+[ext_resource type="PackedScene" uid="uid://w10yjkbvu44k" path="res://Scripts/Components/HitboxComponent/HitboxComponent.tscn" id="2_yv5pd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yv5pd"]
+radius = 0.35494074
+
+[node name="StickWeapon" type="Node3D" unique_id=143855712]
+
+[node name="Stick" parent="." unique_id=369548077 instance=ExtResource("1_fs8ny")]
+
+[node name="HitboxComponent" parent="." unique_id=584544470 instance=ExtResource("2_yv5pd")]
+
+[node name="CollisionShape3D" parent="HitboxComponent/Area3D" parent_id_path=PackedInt32Array(584544470, 584544470) index="0" unique_id=1123485975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20250821, 0)
+shape = SubResource("SphereShape3D_yv5pd")
+
+[editable path="HitboxComponent"]

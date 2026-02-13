@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://c6todnsymjhba"]
 
 [ext_resource type="Script" uid="uid://dw57smqu6n4fx" path="res://Entities/Player/PlayerScript.cs" id="1_e5kic"]
+[ext_resource type="PackedScene" uid="uid://dxccdt7v2456j" path="res://Scripts/Components/HealthComponent/HealthComponent.tscn" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://6axwwl6gv1p3" path="res://Scripts/Components/HurtboxComponent/HurtboxComponent.tscn" id="3_1des2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u36tg"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1093121812]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1des2"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1093121812 node_paths=PackedStringArray("_healthComponent", "_hurtboxComponent")]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_e5kic")
+_healthComponent = NodePath("Components/HealthComponent")
+_hurtboxComponent = NodePath("Components/HurtboxComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1557225357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -14,3 +22,16 @@ shape = SubResource("CapsuleShape3D_u36tg")
 [node name="Head" type="Camera3D" parent="." unique_id=1709102749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5045267, 0)
 fov = 90.0
+
+[node name="Components" type="Node" parent="." unique_id=812732454]
+
+[node name="HealthComponent" parent="Components" unique_id=334333592 instance=ExtResource("2_ww0jn")]
+
+[node name="HurtboxComponent" parent="Components" unique_id=730448499 node_paths=PackedStringArray("HealthComponent") instance=ExtResource("3_1des2")]
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" parent="Components/HurtboxComponent" index="0" unique_id=563348473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1des2")
+
+[editable path="Components/HurtboxComponent"]
