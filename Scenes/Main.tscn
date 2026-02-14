@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bjvpjopivmlpl"]
 
 [ext_resource type="PackedScene" uid="uid://c6todnsymjhba" path="res://Entities/Player/Player.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://cdfrfcb2vncqp" path="res://Assets/Sticks/StickWeapon.tscn" id="2_idj7w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c1w88"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,17 +28,11 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1084647358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08863938, 0)
 use_collision = true
 size = Vector3(12, 1, 12)
 
 [node name="Player" parent="." unique_id=1093121812 instance=ExtResource("1_r150o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8319178, 0)
-_moveSpeed = 4.0
-_jumpForce = 5.0
-_mouseSensitivity = 0.002
 
-[node name="HealthComponent" parent="Player/Components" parent_id_path=PackedInt32Array(1093121812, 812732454) index="0" unique_id=334333592]
-Health = 1.0
-
-[editable path="Player"]
-[editable path="Player/Components/HurtboxComponent"]
+[node name="StickWeapon" parent="." unique_id=143855712 instance=ExtResource("2_idj7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8399954, 0.4987247, -1.7263474)

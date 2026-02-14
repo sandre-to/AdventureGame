@@ -12,7 +12,8 @@ public partial class EquippableItemResource : ItemResource
         Pickaxe,
         Shovel,
         Spear,
-        Staff
+        Staff,
+        Bow
     }
 
     public enum WeaponTier

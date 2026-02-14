@@ -1,6 +1,5 @@
 using Godot;
 using Scripts.Components;
-using System;
 
 public partial class PlayerScript : CharacterBody3D
 {
@@ -25,7 +24,7 @@ public partial class PlayerScript : CharacterBody3D
 
     // References to child nodes.
     private Camera3D _cam;
-
+    private RayCast3D _hitscan;
 
     public override void _Ready()
     {   
@@ -36,7 +35,12 @@ public partial class PlayerScript : CharacterBody3D
         if (_cam == null)
         {
             GD.PushError("Missing camera node in player scene.");
-            return;
+        }
+
+        _hitscan = GetNode<RayCast3D>("%Hitscan");
+        if (_hitscan == null)
+        {
+            GD.PushError("Missing hitscan node.");
         }
 
         _healthComponent.Destroyed += DoSomethingWhenDestroyed;
