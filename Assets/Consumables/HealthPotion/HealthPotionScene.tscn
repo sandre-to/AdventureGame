@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bpj7rrgtrh6c"]
+
+[ext_resource type="Script" uid="uid://cf86karmhk4kf" path="res://Assets/Consumables/HealthPotion/HealthPotionScript.cs" id="1_1p0jq"]
+[ext_resource type="PackedScene" uid="uid://b3xamci4ug5ym" path="res://Assets/Consumables/HealthPotion/HealthPotion.glb" id="1_72rh4"]
+[ext_resource type="Script" uid="uid://bdmnxguepdo0q" path="res://Scripts/Resources/Items/ConsumableItemResource.cs" id="2_8qewn"]
+[ext_resource type="PackedScene" uid="uid://ds2iboeo2bbky" path="res://Scripts/InteractionSystem/InteractionArea.tscn" id="2_qahyf"]
+[ext_resource type="Script" uid="uid://b6q8lhb1wu7a8" path="res://Scripts/Resources/Items/ItemStack.cs" id="3_t8q40"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1p0jq"]
+friction = 0.63
+bounce = 0.45
+
+[sub_resource type="Resource" id="Resource_8qewn"]
+script = ExtResource("2_8qewn")
+Type = 2
+Name = "Health Potion"
+ItemDescription = "Give more life to the player."
+metadata/_custom_type_script = "uid://bdmnxguepdo0q"
+
+[sub_resource type="Resource" id="Resource_t8q40"]
+script = ExtResource("3_t8q40")
+Item = SubResource("Resource_8qewn")
+metadata/_custom_type_script = "uid://b6q8lhb1wu7a8"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_72rh4"]
+radius = 0.17335825
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qahyf"]
+radius = 0.28729087
+
+[node name="HealthPotion" type="RigidBody3D" unique_id=1068455707 node_paths=PackedStringArray("interactionArea")]
+collision_mask = 2
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_1p0jq")
+script = ExtResource("1_1p0jq")
+interactionArea = NodePath("InteractionArea")
+_itemData = SubResource("Resource_t8q40")
+
+[node name="HealthPotion" parent="." unique_id=355027503 instance=ExtResource("1_72rh4")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=642072261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16857532, 0)
+shape = SubResource("SphereShape3D_72rh4")
+
+[node name="InteractionArea" parent="." unique_id=331940427 instance=ExtResource("2_qahyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17398581, 0)
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=898481940]
+shape = SubResource("SphereShape3D_qahyf")

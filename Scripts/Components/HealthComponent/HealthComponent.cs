@@ -10,11 +10,6 @@ public partial class HealthComponent : BaseComponent
     [Export]
     public float Health;
 
-    public override void _Ready()
-    {
-        GD.Print(Health);
-    }
-
     public void TakeDamage(float amount)
     {
         Health = Mathf.Max(Health - amount, 0);

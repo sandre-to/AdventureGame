@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace Scripts.Resources.Items;
+
 [GlobalClass]
 public partial class EquippableItemResource : ItemResource
 {
@@ -21,6 +23,7 @@ public partial class EquippableItemResource : ItemResource
         Low,
         Medium,
         High,
+        Rare,
         Legendary
     }
 

@@ -4,4 +4,3 @@
 
 [node name="InventorySystem" type="Node" unique_id=878990955]
 script = ExtResource("1_cndij")
-Items = Array[Object]([])

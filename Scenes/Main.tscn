@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c6todnsymjhba" path="res://Entities/Player/Player.tscn" id="1_r150o"]
 [ext_resource type="PackedScene" uid="uid://cdfrfcb2vncqp" path="res://Assets/Sticks/StickWeapon.tscn" id="2_idj7w"]
+[ext_resource type="PackedScene" uid="uid://bpj7rrgtrh6c" path="res://Assets/Consumables/HealthPotion/HealthPotionScene.tscn" id="3_kln2b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c1w88"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -37,3 +38,8 @@ _mouseSensitivity = 0.001
 
 [node name="StickWeapon" parent="." unique_id=143855712 instance=ExtResource("2_idj7w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8399954, 0.4987247, -1.7263474)
+
+[node name="HealthPotion" parent="." unique_id=1068455707 instance=ExtResource("3_kln2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4870166, 3.3071885, 0)
+collision_layer = 16
+collision_mask = 3

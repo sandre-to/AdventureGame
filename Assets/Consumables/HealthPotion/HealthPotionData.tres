@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ConsumableItemResource" format=3 uid="uid://fq5muqoh1xtw"]
+
+[ext_resource type="Script" uid="uid://bdmnxguepdo0q" path="res://Scripts/Resources/Items/ConsumableItemResource.cs" id="1_tfocm"]
+
+[resource]
+script = ExtResource("1_tfocm")
+Type = 2
+Name = "Health Potion"
+ItemDescription = "Give more life to the player."
+metadata/_custom_type_script = "uid://bdmnxguepdo0q"

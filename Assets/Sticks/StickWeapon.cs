@@ -1,6 +1,7 @@
 using Godot;
 using Scripts.InteractionSystem;
 using Scripts.InventorySystem;
+using Scripts.Resources.Items;
 using System;
 
 public partial class StickWeapon : StaticBody3D
@@ -11,15 +12,15 @@ public partial class StickWeapon : StaticBody3D
     [Export]
     private InteractionArea _interactionArea;
 
+
     public override void _Ready()
     {
-        _interactionArea.Interacted += PickUpStick;
+        _interactionArea.Interacted += PickUp;
     }
 
-    private void PickUpStick()
+    private void PickUp()
     {
-        InventorySystem.Instance.AddItem(_itemData);
-        InventorySystem.Instance.PrintItems();
+        InventorySystem.Instance.AddWeapon(_itemData);
         QueueFree();
     }
 }

@@ -22,13 +22,8 @@ public partial class ItemResource : Resource
 
     [Export]
     public Texture2D Image;
-
-    [Export]
-    public int Amount;
-
     public override string ToString()
     {
-        return $"{Name} -> {Amount}";
+        return $"{Name} -> {Type}";
     }
-
 }
