@@ -4,20 +4,24 @@
 [ext_resource type="Script" uid="uid://cph08m232p2wo" path="res://Entities/Player/HitscanScript.cs" id="2_1des2"]
 [ext_resource type="PackedScene" uid="uid://dxccdt7v2456j" path="res://Scripts/Components/HealthComponent/HealthComponent.tscn" id="2_ww0jn"]
 [ext_resource type="PackedScene" uid="uid://6axwwl6gv1p3" path="res://Scripts/Components/HurtboxComponent/HurtboxComponent.tscn" id="3_1des2"]
+[ext_resource type="Script" uid="uid://cya5s7njxr7jm" path="res://Scripts/StateMachine/StateMachine.cs" id="5_an6q6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u36tg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1des2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1des2"]
-font_size = 32
+font_size = 24
+font_color = Color(0.92535293, 0.9253528, 0.9253529, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1093121812 node_paths=PackedStringArray("_healthComponent", "_hurtboxComponent")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_e5kic")
-_healthComponent = NodePath("HealthComponent")
-_hurtboxComponent = NodePath("HurtboxComponent")
+_healthComponent = NodePath("Components/HealthComponent")
+_hurtboxComponent = NodePath("Components/HurtboxComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1557225357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -37,36 +41,41 @@ hit_back_faces = false
 collide_with_areas = true
 script = ExtResource("2_1des2")
 
-[node name="HealthComponent" parent="." unique_id=334333592 instance=ExtResource("2_ww0jn")]
+[node name="Components" type="Node3D" parent="." unique_id=418128401]
 
-[node name="HurtboxComponent" parent="." unique_id=730448499 node_paths=PackedStringArray("HealthComponent") instance=ExtResource("3_1des2")]
+[node name="HealthComponent" parent="Components" unique_id=334333592 instance=ExtResource("2_ww0jn")]
+Health = 10.0
+
+[node name="HurtboxComponent" parent="Components" unique_id=730448499 node_paths=PackedStringArray("HealthComponent") instance=ExtResource("3_1des2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionShape3D" parent="HurtboxComponent" index="0" unique_id=563348473]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="CollisionShape3D" parent="Components/HurtboxComponent" index="0" unique_id=563348473]
 shape = SubResource("CapsuleShape3D_1des2")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1085853184]
+[node name="StateMachine" type="Node" parent="." unique_id=1573063424]
+script = ExtResource("5_an6q6")
 
-[node name="InteractLabel" type="Label" parent="HUD" unique_id=656375251]
+[node name="PlayerHUD" type="CanvasLayer" parent="." unique_id=1085853184]
+
+[node name="InteractLabel" type="Label" parent="PlayerHUD" unique_id=656375251]
 unique_name_in_owner = true
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -190.0
-offset_top = -169.0
-offset_right = 190.0
-offset_bottom = -107.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -380.0
+offset_top = -71.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "PRESS [E] TO INTERACT"
 label_settings = SubResource("LabelSettings_1des2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[editable path="HurtboxComponent"]
+[editable path="Components/HurtboxComponent"]

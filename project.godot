@@ -34,7 +34,7 @@ folder_colors={
 "res://Entities/": "orange",
 "res://Scenes/": "blue",
 "res://Scripts/": "purple",
-"res://Scripts/Resources/": "green"
+"res://Scripts/Resources/": "purple"
 }
 
 [input]

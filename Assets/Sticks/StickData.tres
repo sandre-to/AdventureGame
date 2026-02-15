@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_rdlox")
 type = 6
-itemType = 1
+Type = 1
 Name = "Stick"
 ItemDescription = "A stick with good reach."
 metadata/_custom_type_script = "uid://c18mmg1vcc38t"

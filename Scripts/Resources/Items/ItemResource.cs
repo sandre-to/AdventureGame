@@ -12,7 +12,7 @@ public partial class ItemResource : Resource
     }
 
     [Export]
-    public ItemType itemType;
+    public ItemType Type;
 
     [Export]
     public string Name;
@@ -21,5 +21,14 @@ public partial class ItemResource : Resource
     public string ItemDescription;
 
     [Export]
-    public Texture2D image;
+    public Texture2D Image;
+
+    [Export]
+    public int Amount;
+
+    public override string ToString()
+    {
+        return $"{Name} -> {Amount}";
+    }
+
 }

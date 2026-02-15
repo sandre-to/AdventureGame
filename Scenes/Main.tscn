@@ -33,6 +33,7 @@ use_collision = true
 size = Vector3(12, 1, 12)
 
 [node name="Player" parent="." unique_id=1093121812 instance=ExtResource("1_r150o")]
+_mouseSensitivity = 0.001
 
 [node name="StickWeapon" parent="." unique_id=143855712 instance=ExtResource("2_idj7w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8399954, 0.4987247, -1.7263474)

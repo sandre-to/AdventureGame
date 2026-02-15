@@ -6,8 +6,11 @@ namespace Scripts.InteractionSystem;
 [GlobalClass]
 public partial class InteractionArea : Area3D
 {
+    [Signal]
+    public delegate void InteractedEventHandler();
+
     public void Interact()
     {   
-        GD.Print($"Interacting with object: {GetOwner<Node3D>().Name}");
+        EmitSignal(SignalName.Interacted);
     } 
 }
