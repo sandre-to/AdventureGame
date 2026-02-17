@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c6todnsymjhba"]
 
 [ext_resource type="Script" uid="uid://dw57smqu6n4fx" path="res://Entities/Player/PlayerScript.cs" id="1_e5kic"]
-[ext_resource type="Script" uid="uid://cph08m232p2wo" path="res://Entities/Player/HitscanScript.cs" id="2_1des2"]
+[ext_resource type="Script" uid="uid://dr11517dtdrrk" path="res://Entities/Player/InteractionCastScript.cs" id="2_gau2p"]
 [ext_resource type="PackedScene" uid="uid://dxccdt7v2456j" path="res://Scripts/Components/HealthComponent/HealthComponent.tscn" id="2_ww0jn"]
 [ext_resource type="PackedScene" uid="uid://6axwwl6gv1p3" path="res://Scripts/Components/HurtboxComponent/HurtboxComponent.tscn" id="3_1des2"]
+[ext_resource type="PackedScene" uid="uid://cslgu10vpmmfy" path="res://Assets/Weapons/Pistol/Pistol.glb" id="3_f14hy"]
 [ext_resource type="Script" uid="uid://cya5s7njxr7jm" path="res://Scripts/StateMachine/StateMachine.cs" id="5_an6q6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u36tg"]
@@ -31,15 +32,23 @@ shape = SubResource("CapsuleShape3D_u36tg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5045267, 0)
 fov = 90.0
 
-[node name="Hitscan" type="RayCast3D" parent="Head" unique_id=1249273872]
+[node name="InteractionCast" type="RayCast3D" parent="Head" unique_id=1249273872]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.41019553)
-target_position = Vector3(0, 0, -8)
+target_position = Vector3(0, 0, -1)
 collision_mask = 8
 hit_from_inside = true
 hit_back_faces = false
 collide_with_areas = true
-script = ExtResource("2_1des2")
+script = ExtResource("2_gau2p")
+
+[node name="Hitscan" type="RayCast3D" parent="Head" unique_id=2012121840]
+target_position = Vector3(0, 0, -10)
+
+[node name="WeaponHolder" type="Node3D" parent="Head" unique_id=1299857512]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.5419438, -0.4320593, -0.4876699)
+
+[node name="Pistol" parent="Head/WeaponHolder" unique_id=342268394 instance=ExtResource("3_f14hy")]
 
 [node name="Components" type="Node3D" parent="." unique_id=418128401]
 
@@ -77,5 +86,52 @@ text = "PRESS [E] TO INTERACT"
 label_settings = SubResource("LabelSettings_1des2")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Hotbar" type="Control" parent="PlayerHUD" unique_id=1657599968]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -72.0
+offset_right = 250.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerHUD/Hotbar" unique_id=1315756252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHUD/Hotbar/MarginContainer" unique_id=977270690]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Panel" type="Panel" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=450255048]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=1344375760]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=606832713]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Panel4" type="Panel" parent="PlayerHUD/Hotbar/MarginContainer/HBoxContainer" unique_id=993259384]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 
 [editable path="Components/HurtboxComponent"]

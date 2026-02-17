@@ -7,9 +7,10 @@ namespace Scripts.StateMachine;
 public abstract partial class State : Node
 {
     [Signal]
-    protected delegate void TransitionedEventHandler();
-    protected void Enter() {}
-    protected void Exit() {}
-    protected void Update() {}
-    protected void PhysicsUpdate() {}
+    public delegate void TransitionedEventHandler(State state, string newState);
+    public void Enter() {}
+    public void Exit() {}
+    public void HandleInput(InputEvent _event) {}
+    public void Update(double _delta) {}
+    public void PhysicsUpdate(double _delta) {}
 }

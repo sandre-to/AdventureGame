@@ -4,7 +4,8 @@ using Scripts.InventorySystem;
 using Scripts.Resources.Items;
 using System;
 
-public partial class StickWeapon : StaticBody3D
+namespace Assets.Weapons;
+public partial class StickWeaponScript : StaticBody3D
 {
     [Export]
     private EquippableItemResource _itemData;

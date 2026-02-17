@@ -25,4 +25,7 @@ public partial class ConsumableItemResource : ItemResource
 
     [Export]
     public ConsumableTier tier;
+
+    [Export]
+    public float Boost = 0f;
 }

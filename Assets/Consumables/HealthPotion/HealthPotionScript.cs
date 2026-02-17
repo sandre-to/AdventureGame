@@ -1,7 +1,7 @@
 using Godot;
 using Scripts.InteractionSystem;
+using Scripts.InventorySystem;
 using Scripts.Resources.Items;
-using System;
 
 namespace Assets.Consumables;
 
@@ -11,7 +11,7 @@ public partial class HealthPotionScript : RigidBody3D
     private InteractionArea interactionArea;
 
     [Export]
-    private ItemStack _itemData;
+    private ConsumableItemResource _itemData;
 
     public override void _Ready()
     {
@@ -26,6 +26,8 @@ public partial class HealthPotionScript : RigidBody3D
 
     private void PickUp()
     {
-        GD.Print($"Picked up {Name}.");
+        InventorySystem.Instance.AddConsumable(_itemData);
+        InventorySystem.Instance.PrintConsumables();
+        QueueFree();
     }
 }

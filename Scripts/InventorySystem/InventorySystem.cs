@@ -1,6 +1,7 @@
+using System.Collections;
 using Godot;
+using Godot.Collections;
 using Scripts.Resources.Items;
-using System;
 
 namespace Scripts.InventorySystem;
 
@@ -9,20 +10,43 @@ public partial class InventorySystem : Node
 {
     public static InventorySystem Instance;
 
+    const int MaxStack = 99; 
+
+    // I want to have three inventory categories:
+    // 1. Holds all items that are craftable
+    // 2. Holds all consumable items -> Potions, buffs etc.
+    // 3. Holds all weapons (which are unique and do not stacks)
+
     [Export]    
-    public Godot.Collections.Array<ItemStack> Items = [];
+    public Array<ItemStack> Items = [];
 
     [Export]
-    public Godot.Collections.Array<EquippableItemResource> Weapons = [];
+    public Array<ItemStack> Consumables = [];
+
+    [Export]
+    public Array<EquippableItemResource> Weapons = [];
 
     public override void _Ready()
     {
         Instance = this;
     }
 
-    public void AddItem(ItemStack item, int amount)
+    public void AddItem(ItemResource item, int amount)
     {
-        
+        if (item.Type != ItemResource.ItemType.CraftingItem) return;
+
+        // Check if a stack of that type exists already
+        foreach (ItemStack stack in Items)
+        {   
+            if (stack.Item.Type == item.Type)
+            {
+                stack.Amount += amount;
+                return;
+            }
+        }
+
+        var newStack = new ItemStack((ItemResource)item.Duplicate());
+        Items.Add(newStack);
     }
 
     public void AddWeapon(EquippableItemResource weapon)
@@ -36,9 +60,36 @@ public partial class InventorySystem : Node
         Weapons.Add(weapon);
     }
 
+    public void AddConsumable(ConsumableItemResource consumable)
+    {
+        if (consumable.Type != ItemResource.ItemType.ConsumableItem) return;
+
+        // Check if a stack of that type exists already
+        foreach (ItemStack stack in Consumables)
+        {   
+            var stackItem = stack.Item as ConsumableItemResource;
+            if (stackItem.type == consumable.type)
+            {
+                stack.Amount += 1;
+                return;
+            }
+        }
+
+        var newStack = new ItemStack((ItemResource)consumable.Duplicate());
+        Consumables.Add(newStack);
+    }
+
     public void PrintItems()
     {
-        foreach (ItemStack item in Items)
+        foreach (var item in Items)
+        {
+            GD.Print(item);
+        }
+    }
+
+    public void PrintConsumables()
+    {
+        foreach (var item in Consumables)
         {
             GD.Print(item);
         }
@@ -46,14 +97,49 @@ public partial class InventorySystem : Node
 
     public void PrintWeapons()
     {
-        foreach (EquippableItemResource weapon in Weapons)
+        foreach (var weapon in Weapons)
         {
             GD.Print(weapon);
         }
     }
 
-    public void GetConsumableItem(ConsumableItemResource.ConsumableType consType)
+    public EquippableItemResource GetWeapon(EquippableItemResource.WeaponType weaponType)
     {
-        
+        foreach (EquippableItemResource weapon in Weapons)
+        {
+            if (weapon.type == weaponType)
+            {
+                return weapon;
+            }
+        }
+        return null;
+    }
+
+    public ItemStack GetConsumableStack(ConsumableItemResource.ConsumableType consType)
+    {
+        foreach (ItemStack stack in Consumables)
+        {
+            var item = (ConsumableItemResource)stack.Item;
+            if (item.type == consType)
+            {
+                return stack;
+            }
+        }
+        return null;
+    }
+
+    public Array<ItemStack> GetItems()
+    {
+        return Items;
+    }
+
+    public Array<ItemStack> GetConsumables()
+    {
+        return Consumables;
+    }
+
+    public Array<EquippableItemResource> GetWeapons()
+    {
+        return Weapons; 
     }
 }

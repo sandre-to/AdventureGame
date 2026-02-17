@@ -2,7 +2,7 @@ using Godot;
 using Scripts.InteractionSystem;
 using System;
 
-public partial class HitscanScript : RayCast3D
+public partial class InteractionCastScript : RayCast3D
 {
     private Label _interactLabel;
 

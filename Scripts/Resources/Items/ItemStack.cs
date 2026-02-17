@@ -3,11 +3,16 @@ using System;
 
 namespace Scripts.Resources.Items;
 [GlobalClass]
-public partial class ItemStack : Resource
+public partial class ItemStack(ItemResource item, int amount = 1) : Resource
 {
     [Export]
-    public ItemResource Item;
+    public ItemResource Item = item;
 
     [Export]
-    public int Amount;
+    public int Amount = amount;
+
+    public override string ToString()
+    {
+        return $"{Item.Name}, {Amount}";
+    }
 }
