@@ -6,10 +6,10 @@ public partial class PlayerScript : CharacterBody3D
 {
 	[ExportCategory("Player properties")]
 	[Export]
-	private float _moveSpeed = 2f;
+	public float MoveSpeed = 2f;
 
 	[Export]
-	private float _jumpForce = 3f;
+	public float JumpForce = 3f;
 
 	[Export]
 	private float _mouseSensitivity = 0.005f;
@@ -24,27 +24,27 @@ public partial class PlayerScript : CharacterBody3D
 	private HurtboxComponent _hurtboxComponent;
 
 	// References to child nodes.
+	public AnimationPlayer Anim;
 	private Camera3D _cam;
 	private RayCast3D _interactionCast;
+
+    public override void _EnterTree()
+    {
+		Anim = GetNode<AnimationPlayer>("%AnimationPlayer");
+		if (Anim == null) GD.PushError("Missing animation node.");
+    }
 
 	public override void _Ready()
 	{   
 		// Makes sure the mouse cursor is invincible during gameplay. 
-		// Input.MouseMode = Input.MouseModeEnum.Captured;
-
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		_cam = GetNode<Camera3D>("Head");
-		if (_cam == null)
-		{
-			GD.PushError("Missing camera node in player scene.");
-		}
+		if (_cam == null) GD.PushError("Missing camera node in player scene.");
 
 		_interactionCast = GetNode<RayCast3D>("%InteractionCast");
-		if (_interactionCast == null)
-		{
-			GD.PushError("Missing hitscan node.");
-		}
-
+		if (_interactionCast == null) GD.PushError("Missing hitscan node.");
+		
 		_healthComponent.Destroyed += DoSomethingWhenDestroyed;
 	}
 
@@ -92,9 +92,9 @@ public partial class PlayerScript : CharacterBody3D
 		var velocity = Velocity;
 		velocity = Transform.Basis * new Vector3
 			(
-				direction.X * _moveSpeed, 
+				direction.X * MoveSpeed, 
 				velocity.Y, 
-				direction.Y * _moveSpeed
+				direction.Y * MoveSpeed
 			);
 
 		// Apply constant gravity if the player is in the air.
@@ -106,7 +106,7 @@ public partial class PlayerScript : CharacterBody3D
 		// Jump input.
 		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
 		{
-			velocity.Y = _jumpForce;
+			velocity.Y = JumpForce;
 		}
 
 		// Apply all the changes back to Velocity

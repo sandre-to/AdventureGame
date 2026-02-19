@@ -33,6 +33,7 @@ use_collision = true
 size = Vector3(12, 1, 12)
 
 [node name="Player" parent="." unique_id=1093121812 instance=ExtResource("1_r150o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0763028, 0)
 _mouseSensitivity = 0.001
 
 [node name="HealthPotion" parent="." unique_id=1068455707 instance=ExtResource("3_kln2b")]

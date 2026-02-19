@@ -17,6 +17,7 @@ public partial class HealthComponent : BaseComponent
         if (IsDestroyed())
         {
             EmitSignal(SignalName.Destroyed);
+            GetParent().QueueFree();
         }
     }
 
